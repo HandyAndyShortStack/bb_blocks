@@ -1,0 +1,2 @@
+rvm use 2.0.0@bb_blocks --create
+cowsay -eo I lost me eye!
