@@ -1,2 +1,1 @@
-window.Block = Backbone.Model.extend
-  urlRoot: 'blocks'
+window.Block = Backbone.Model.extend()
