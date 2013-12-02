@@ -1,5 +1,5 @@
 BbBlocks::Application.routes.draw do
-  resources :scaffolds
+  resources :scaffolds, :blocks
   resources :sandboxes do
     resources :blocks
   end

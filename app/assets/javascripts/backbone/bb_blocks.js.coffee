@@ -4,8 +4,4 @@
 #= require_tree ./views
 #= require_tree ./routers
 
-window.BbBlocks =
-  Models: {}
-  Collections: {}
-  Routers: {}
-  Views: {}
+window.BbBlocks = {}
