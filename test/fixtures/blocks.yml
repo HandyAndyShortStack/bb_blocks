@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  options: MyText
+  sandbox_id: 1
+
+two:
+  type: 
+  options: MyText
+  sandbox_id: 1
