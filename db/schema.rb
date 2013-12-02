@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202175754) do
+ActiveRecord::Schema.define(:version => 20131202224244) do
 
   create_table "blocks", :force => true do |t|
     t.string   "type"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20131202175754) do
     t.integer  "sandbox_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "url"
+    t.integer  "site_id"
+    t.integer  "template_id"
+    t.string   "title"
+    t.text     "options"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "sandboxes", :force => true do |t|
