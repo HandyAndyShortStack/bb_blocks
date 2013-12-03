@@ -1,1 +1,1 @@
-window.Block = Backbone.Model.extend()
+window.Block = Backbone.Model.extend {}

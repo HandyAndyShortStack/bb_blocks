@@ -1,5 +1,12 @@
 class SandboxesController < ApplicationController
-  before_filter :find_sandbox, except: :create
+  before_filter :find_sandbox, except: [:index, :create]
+
+  def index
+    @page = Page.find(params[:page_id])
+    respond_to do |format|
+      format.json { render json: @page.sandboxes }
+    end
+  end
 
   def create
     @sandbox = Sandbox.new(params[:sandbox])
