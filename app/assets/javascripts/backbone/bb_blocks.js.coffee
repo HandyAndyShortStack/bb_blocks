@@ -15,5 +15,3 @@ $ ->
         name = sandboxDiv.id.replace 'sandbox-', ''
         sandbox = page.sandboxes.findWhere(name: name) or
             page.sandboxes.add(name: name, page_id: page.id).save()
-
-        sandbox
