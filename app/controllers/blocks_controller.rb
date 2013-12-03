@@ -1,11 +1,18 @@
 class BlocksController < ApplicationController
-  before_filter :find_block, except: :create
+  before_filter :find_block, except: [:create, :index]
+
+  def index
+    @sandbox = Sandbox.find(params[:sandbox_id])
+    respond_to do |format|
+      format.json { render json: @sandbox.blocks }
+    end
+  end
 
   def create
     @block = Block.new(params[:block])
     respond_to do |format|
       if @block.save
-        format.json { render json: @block, status: :created, location: @block }
+        format.json { render json: @block, status: :created, head: :no_content }
       else
         format.json { render json: @block.errors, status: :unprocessable_entity }
       end
@@ -31,7 +38,6 @@ class BlocksController < ApplicationController
   def destroy
     @block.destroy
     respond_to do |format|
-      format.html { redirect_to blocks_url }
       format.json { head :no_content }
     end
   end

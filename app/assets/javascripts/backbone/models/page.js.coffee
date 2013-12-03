@@ -1,4 +1,4 @@
 window.Page = Backbone.Model.extend
   urlRoot: '/pages'
   initialize: ->
-    @sandboxes = new SandboxCollection(this)
+    @sandboxes = _.extend new SandboxCollection(), page: this
