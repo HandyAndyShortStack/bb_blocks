@@ -7,10 +7,13 @@
 window.BbBlocks = {}
 
 $ ->
-  page = window.page = new Page(id: 1)
+  window.page = new Page(id: 1)
   page.fetch()
-  page.sandboxes.fetch()
+  page.sandboxes.fetch
+    success: ->
+      _.each $('.sandbox'), (sandboxDiv) ->
+        name = sandboxDiv.id.replace 'sandbox-', ''
+        sandbox = page.sandboxes.findWhere(name: name) or
+            page.sandboxes.add(name: name, page_id: page.id).save()
 
-  _.each $('.sandbox'), (sandboxDiv) ->
-    name = sandboxDiv.id.replace 'sandbox-', ''
-    sandbox = page.sandboxes.findWhere
+        sandbox
