@@ -4,4 +4,7 @@ window.Sandbox = Backbone.Model.extend
     @view = new SandboxView(model: this)
     @page = @collection.page
 
-    @blocks.fetch()
+    @blocks.fetch
+      success: =>
+        _.each @get('order'), (block_id) =>
+          @blocks.findWhere(id: block_id).view.$el.appendTo @view.$el

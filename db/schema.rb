@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202224244) do
+ActiveRecord::Schema.define(:version => 20131205185059) do
 
   create_table "blocks", :force => true do |t|
     t.string   "type"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20131202224244) do
     t.integer  "page_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "order"
   end
 
   create_table "scaffolds", :force => true do |t|

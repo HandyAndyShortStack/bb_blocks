@@ -4,4 +4,4 @@ window.Block = Backbone.Model.extend
     @view = new BlockView model: this
     @fetch
       success: =>
-        @view.render().$el.appendTo @collection.sandbox.view.$el
+        @view.render()
