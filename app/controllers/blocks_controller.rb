@@ -3,8 +3,9 @@ class BlocksController < ApplicationController
 
   def index
     @sandbox = Sandbox.find(params[:sandbox_id])
+    ordered_blocks = @sandbox.order.map { |id| Block.find id }
     respond_to do |format|
-      format.json { render json: @sandbox.blocks }
+      format.json { render json: ordered_blocks }
     end
   end
 

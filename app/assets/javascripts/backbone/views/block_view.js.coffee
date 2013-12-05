@@ -1,5 +1,10 @@
 window.BlockView = Backbone.View.extend
 
+  className: 'block'
+
+  id: ->
+    'block-' + @model.id
+
   render: ->
     @$el.html _.template(@template, @model.options)
     this
