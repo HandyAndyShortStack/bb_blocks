@@ -22,3 +22,11 @@ $ ->
     dropOnEmpty: true
 
   $('.sandbox').disableSelection()
+
+Backbone.Collection.prototype.saveSync = (callback) ->
+  if typeof callback != 'function' then callback = ->
+  reduceFunc = (a, b) ->
+    ->
+      b.save {}, success: ->
+        a()
+  _.reduce(@models, reduceFunc, callback)()

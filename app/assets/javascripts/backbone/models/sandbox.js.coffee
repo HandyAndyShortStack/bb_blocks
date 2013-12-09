@@ -7,5 +7,5 @@ window.Sandbox = Backbone.Model.extend
     @page = @collection.page
 
   getOrder: ->
-    @view.$el.find('.block').map ->
-      @id
+    Array.apply null, @view.$el.find('.block').map ->
+      parseInt @id[6..], 10
