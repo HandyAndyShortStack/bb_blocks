@@ -17,3 +17,8 @@ $ ->
             page.sandboxes.add(name: name, page_id: page.id).save()
         sandbox.view.setElement sandboxDiv
 
+  $('.sandbox').sortable
+    connectWith: '.sandbox'
+    dropOnEmpty: true
+
+  $('.sandbox').disableSelection()

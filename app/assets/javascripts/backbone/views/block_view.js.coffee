@@ -11,5 +11,5 @@ window.BlockView = Backbone.View.extend
   
   initialize: ->
     @template = $('#template-' + @model.get('type')).html()
-    @listenTo @model, "change", @render
+    @listenTo @model, 'change', @render
     @render()
