@@ -1,7 +1,7 @@
-window.Block = Backbone.Model.extend
+BbBlocks.Block = Backbone.Model.extend
   
   initialize: ->
-    @view = new BlockView model: this
+    @view = new BbBlocks.BlockView model: this
     @fetch
       success: =>
         @view.render()

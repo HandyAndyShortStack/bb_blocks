@@ -7,7 +7,7 @@
 window.BbBlocks = {}
 
 $ ->
-  window.page = new Page(id: 1)
+  window.page = new BbBlocks.Page(id: 1)
   page.fetch()
   page.sandboxes.fetch
     success: ->

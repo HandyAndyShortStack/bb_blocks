@@ -1,6 +1,6 @@
-window.SandboxCollection = Backbone.Collection.extend
+BbBlocks.SandboxCollection = Backbone.Collection.extend
 
-  model: Sandbox
+  model: BbBlocks.Sandbox
 
   url: ->
     @page.url() + '/sandboxes'

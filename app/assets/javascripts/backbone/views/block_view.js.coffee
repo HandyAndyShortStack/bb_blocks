@@ -1,4 +1,4 @@
-window.BlockView = Backbone.View.extend
+BbBlocks.BlockView = Backbone.View.extend
 
   className: 'block'
 

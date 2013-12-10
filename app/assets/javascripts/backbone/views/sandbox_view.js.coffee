@@ -1,1 +1,1 @@
-window.SandboxView = Backbone.View.extend {}
+BbBlocks.SandboxView = Backbone.View.extend {}

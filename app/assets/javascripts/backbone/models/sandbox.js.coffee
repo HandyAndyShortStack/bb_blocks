@@ -1,9 +1,9 @@
-window.Sandbox = Backbone.Model.extend
+BbBlocks.Sandbox = Backbone.Model.extend
 
   initialize: ->
-    CustomBlockCollection = BlockCollection.extend(sandbox: this)
+    CustomBlockCollection = BbBlocks.BlockCollection.extend(sandbox: this)
     @blocks = new CustomBlockCollection()
-    @view = new SandboxView(model: this)
+    @view = new BbBlocks.SandboxView(model: this)
     @page = @collection.page
 
   getOrder: ->

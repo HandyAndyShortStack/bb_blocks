@@ -1,6 +1,6 @@
-window.BlockCollection = Backbone.Collection.extend
+BbBlocks.BlockCollection = Backbone.Collection.extend
 
-  model: Block
+  model: BbBlocks.Block
 
   url: ->
     '/sandboxes/' + @sandbox.id + '/blocks'

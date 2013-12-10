@@ -1,7 +1,7 @@
-window.Page = Backbone.Model.extend
+BbBlocks.Page = Backbone.Model.extend
 
   urlRoot: '/pages'
 
   initialize: ->
-    CustomSandboxCollection = SandboxCollection.extend(page: this)
+    CustomSandboxCollection = BbBlocks.SandboxCollection.extend(page: this)
     @sandboxes = new CustomSandboxCollection()
