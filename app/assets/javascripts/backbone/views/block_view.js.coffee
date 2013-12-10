@@ -10,13 +10,12 @@ BbBlocks.BlockView = Backbone.View.extend
     this
   
   initialize: ->
-    @template = $('#template-' + @model.get('type')).html()
+    @template = @sharedTemplate + $('#template-' + @model.get('type')).html()
     @listenTo @model, 'change', @render
     @render()
   
   enter: ->
-    @$el.appendTo @model.collection.
-    sandbox.view.$el    
+    @$el.appendTo @model.collection.sandbox.view.$el    
 
   resetId: ->
     @$el.attr('id', @id())

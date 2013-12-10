@@ -7,6 +7,8 @@
 window.BbBlocks = {}
 
 $ ->
+  BbBlocks.BlockView.prototype.sharedTemplate = $('#template-control-buttons').html()
+
   window.page = new BbBlocks.Page(id: 1)
   page.fetch()
   page.sandboxes.fetch
@@ -20,6 +22,7 @@ $ ->
   $('.sandbox').sortable
     connectWith: '.sandbox'
     dropOnEmpty: true
+    handle: '.icon-move'
 
   $('.sandbox').disableSelection()
 
