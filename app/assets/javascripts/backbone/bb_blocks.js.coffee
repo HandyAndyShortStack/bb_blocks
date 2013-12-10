@@ -28,5 +28,6 @@ Backbone.Collection.prototype.saveSync = (callback) ->
   reduceFunc = (a, b) ->
     ->
       b.save {}, success: ->
+        b.view.resetId()
         a()
   _.reduce(@models, reduceFunc, callback)()

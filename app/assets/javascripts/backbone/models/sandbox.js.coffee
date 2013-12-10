@@ -7,5 +7,10 @@ window.Sandbox = Backbone.Model.extend
     @page = @collection.page
 
   getOrder: ->
-    Array.apply null, @view.$el.find('.block').map ->
-      parseInt @id[6..], 10
+    _.map @view.$el.find('.block').toArray(), (el) ->
+      parseInt el.id[6..], 10
+
+  publish: (callback) ->
+    @blocks.saveSync =>
+      @set order: @getOrder()
+      @save()

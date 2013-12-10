@@ -8,10 +8,5 @@ window.BlockCollection = Backbone.Collection.extend
   initialize: ->
     @fetch
       success: =>
-        @each (block) =>
-          block.view.$el.appendTo @sandbox.view.$el
-
-  save: ->
-    @saveSync =>
-      @sandbox.set(order: @sandbox.getOrder)
-      @sandbox.save()
+        @each (block) ->
+          block.view.enter()

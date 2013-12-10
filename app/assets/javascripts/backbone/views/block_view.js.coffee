@@ -13,3 +13,10 @@ window.BlockView = Backbone.View.extend
     @template = $('#template-' + @model.get('type')).html()
     @listenTo @model, 'change', @render
     @render()
+  
+  enter: ->
+    @$el.appendTo @model.collection.
+    sandbox.view.$el    
+
+  resetId: ->
+    @$el.attr('id', @id())
