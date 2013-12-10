@@ -1,7 +1,8 @@
 BbBlocks.Block = Backbone.Model.extend
   
   initialize: ->
-    @view = new BbBlocks.BlockView model: this
+    viewConstructor = BbBlocks[@get('type') + 'View'] || BbBlocks.BlockView
+    @view = new viewConstructor(model: this)
     @fetch
       success: =>
         @view.render()

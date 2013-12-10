@@ -1,8 +1,6 @@
 BbBlocks.BlockCollection = Backbone.Collection.extend
 
-  model: (attrs, options) ->
-    model = BbBlocks[attrs.type] or BbBlocks.Block
-    new model(attrs, options)
+  model: BbBlocks.Block
 
   url: ->
     '/sandboxes/' + @sandbox.id + '/blocks'
