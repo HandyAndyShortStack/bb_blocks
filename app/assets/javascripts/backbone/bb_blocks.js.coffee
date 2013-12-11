@@ -6,8 +6,13 @@
 
 window.BbBlocks = {}
 
+_.templateSettings = {
+  interpolate: /\{\{\=(.+?)\}\}/g,
+  evaluate: /\{\{(.+?)\}\}/g
+};
+
 $ ->
-  BbBlocks.BlockView.prototype.sharedTemplate = $('#template-control-buttons').html()
+  BbBlocks.BlockView.prototype.sharedTemplate = $('#template-control-buttons').text()
 
   window.page = new BbBlocks.Page(id: 1)
   page.fetch()

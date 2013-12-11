@@ -20,3 +20,48 @@
 <script id="template-RedSquareBlock" type="text/template">
   <div style="background-color:red;height:100px;width:100px;margin:10px"></div>
 </script>
+
+<script id="template-ContactFormBlock" type="text/template">
+  <h1>THIS DOES NOT WORK!!!</h1>
+</script>
+
+<script id="template-PageMenuBlock" type="text/template">
+  <ul>
+    {{ _.each(pages, function(page) { }}
+      <li>
+        <a href="{{= page.url }}">{{= page.title }}</a>
+      </li>
+    {{ }); }}
+  </ul>
+</script>
+
+<script id="template-PostListBlock" type="text/template">
+  <h1>THIS DOES NOT WORK YET!!</h1>
+</script>
+
+<script id="template-ShowImageBlock" type="text/template">
+  {{ if (image_link) { }}
+    <a href="{{= image_link }}">
+      <img src="{{= asset_url }}" />
+    </a>
+  {{ } else { }}
+    <img src="{{= asset_url }}" />
+  {{ } }}
+</script>
+
+<script id="template-SlideshowBlock" type="text/template">
+  {{ var id = _.uniqueId('carousel-'); }}
+  <div id="{{= id }}" class="carousel">
+    {{ _.each(images, function(image, index) { }}
+      <div class="item{{= if (index === 0) { " active" } }}">
+        <img src="{{= image.asset_url }}" class="carousel-image" />
+      </div>
+    {{ }); }}
+    <a class="carousel-control left" href="#{{= id }}" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#{{= id }}" data-slide="next">&rsaquo;</a>
+  </div>
+</script>
+
+<script id="template-TextBlock" type="text/template">
+  {{= content }}
+</script>

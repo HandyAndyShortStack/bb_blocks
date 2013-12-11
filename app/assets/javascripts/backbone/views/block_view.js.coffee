@@ -10,7 +10,7 @@ BbBlocks.BlockView = Backbone.View.extend
     this
   
   initialize: ->
-    @template = @sharedTemplate + $('#template-' + @model.get('type')).html()
+    @template = @sharedTemplate + $('#template-' + @model.get('type')).text()
     @listenTo @model, 'change', @render
     @render()
   
