@@ -8,7 +8,11 @@ class Block < ActiveRecord::Base
   end
 
   def self.create_child_models
-    child_models = ['HTMLBlock', 'BlueSquareBlock', 'RedSquareBlock']
+    child_models = [
+      'HTMLBlock','BlueSquareBlock', 'RedSquareBlock', 'ContactFormBlock',
+      'PageMenuBlock', 'PostListBlock', 'ShowImageBlock', 'SlideshowBlock',
+      'TextBlock'
+    ]
     child_models.each do |model_name|
       Object.const_set model_name, Class.new(Block)
     end

@@ -22,6 +22,7 @@
 </script>
 
 <script id="template-ContactFormBlock" type="text/template">
+  <h3>Contact Form</h3>
   <h1>THIS DOES NOT WORK!!!</h1>
 </script>
 
@@ -36,6 +37,7 @@
 </script>
 
 <script id="template-PostListBlock" type="text/template">
+  <h3>Post List</h3>
   <h1>THIS DOES NOT WORK YET!!</h1>
 </script>
 
@@ -53,7 +55,7 @@
   {{ var id = _.uniqueId('carousel-'); }}
   <div id="{{= id }}" class="carousel">
     {{ _.each(images, function(image, index) { }}
-      <div class="item{{= if (index === 0) { " active" } }}">
+      <div class="item{{ if (index === 0) { }}active{{ } }}">
         <img src="{{= image.asset_url }}" class="carousel-image" />
       </div>
     {{ }); }}

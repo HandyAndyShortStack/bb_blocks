@@ -6,7 +6,7 @@ BbBlocks.BlockView = Backbone.View.extend
     'block-' + @model.id
 
   render: ->
-    @$el.html _.template(@template, @model.options)
+    @$el.html _.template(@template, @model.get('options'))
     this
   
   initialize: ->
