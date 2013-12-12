@@ -31,6 +31,8 @@ $ ->
 
   $('.sandbox').disableSelection()
 
+  window.instantiator = new BbBlocks.Instantiator()
+
 Backbone.Collection.prototype.saveSync = (callback) ->
   if typeof callback != 'function' then callback = ->
   reduceFunc = (a, b) ->
