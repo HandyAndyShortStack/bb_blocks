@@ -1,4 +1,6 @@
 <div id="block-tray">
-  <div id="instantiator-BlueSquareBlock" style="display:inline-block;">
-  </div>
+  <% Block.subclasses.each do |subclass| %>
+    <div class="instantiator-dock" data-type="<%= subclass.to_s %>" style="display:inline-block;">
+    </div>
+  <% end %>
 </div>

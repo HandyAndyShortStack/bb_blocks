@@ -31,7 +31,8 @@ $ ->
 
   $('.sandbox').disableSelection()
 
-  window.instantiator = new BbBlocks.Instantiator()
+  _.each $('.instantiator-dock'), (dock) ->
+    new BbBlocks.Instantiator(type: $(dock).data('type'))
 
 Backbone.Collection.prototype.saveSync = (callback) ->
   if typeof callback != 'function' then callback = ->

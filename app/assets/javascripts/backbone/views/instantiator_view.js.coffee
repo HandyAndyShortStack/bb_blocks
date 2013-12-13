@@ -1,22 +1,21 @@
 BbBlocks.InstantiatorView = Backbone.View.extend
-  
-  id: 'instantiator'
 
   render: ->
     self = this
-    @$el.html '<div style="height:50px;width:50px;background-color:grey;"></div>'
+    @$el.html '<div style="height:50px;background-color:grey;color:white;">' + @model.get('type') + '</div>'
 
   initialize: ->
     @render()
-    @$el.appendTo $('#instantiator-BlueSquareBlock')
+    dock = $('.instantiator-dock[data-type=' + @model.get('type') + ']')
+    @$el.appendTo dock
 
     @$el.sortable
       connectWith: '.sandbox'
-      beforeStop: (event, ui) =>
+      update: (event, ui) =>
         ui.item.removeAttr 'style'
-        sandboxId = ui.placeholder.parent().attr('id')[8..]
+        sandboxId = ui.item.parent().attr('id')[8..]
         sandbox = page.sandboxes.findWhere(name: sandboxId)
-        block = sandbox.blocks.add(type: 'BlueSquareBlock', sandbox_id: sandbox.id)
+        block = sandbox.blocks.add(type: @model.get('type'), sandbox_id: sandbox.id)
         ui.item.replaceWith block.view.$el
         @setElement $('<div></div>')
         @initialize()
