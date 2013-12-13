@@ -11,6 +11,15 @@ _.templateSettings = {
   evaluate: /\{\{(.+?)\}\}/g
 };
 
+Backbone.Collection.prototype.saveSync = (callback) ->
+  if typeof callback != 'function' then callback = ->
+  reduceFunc = (a, b) ->
+    ->
+      b.save {}, success: ->
+        b.view.resetId()
+        a()
+  _.reduce(@models, reduceFunc, callback)()
+
 $ ->
   BbBlocks.BlockView.prototype.sharedTemplate = $('#template-control-buttons').text()
 
@@ -29,16 +38,17 @@ $ ->
     dropOnEmpty: true
     handle: '.icon-move'
 
+  $('.sandbox').droppable
+    over: ->
+      $(this).addClass 'hovering'
+      $(this).find('.ui-sortable-placeholder').show()
+    out: ->
+      $(this).removeClass 'hovering'
+      $('.ui-sortable-placeholder').hide()
+    receive: ->
+      $(this).droppable('cancel')
+
   $('.sandbox').disableSelection()
 
   _.each $('.instantiator-dock'), (dock) ->
     new BbBlocks.Instantiator(type: $(dock).data('type'))
-
-Backbone.Collection.prototype.saveSync = (callback) ->
-  if typeof callback != 'function' then callback = ->
-  reduceFunc = (a, b) ->
-    ->
-      b.save {}, success: ->
-        b.view.resetId()
-        a()
-  _.reduce(@models, reduceFunc, callback)()

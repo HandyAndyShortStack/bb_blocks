@@ -12,12 +12,15 @@ BbBlocks.InstantiatorView = Backbone.View.extend
     @$el.sortable
       connectWith: '.sandbox'
       update: (event, ui) =>
-        ui.item.removeAttr 'style'
         sandboxId = ui.item.parent().attr('id')[8..]
         sandbox = page.sandboxes.findWhere(name: sandboxId)
+        return @$el.sortable('cancel') unless sandbox.view.$el.hasClass 'hovering'
+        ui.item.removeAttr 'style'
         block = sandbox.blocks.add(type: @model.get('type'), sandbox_id: sandbox.id)
         ui.item.replaceWith block.view.$el
         @setElement $('<div></div>')
         @initialize()
+      start: (event, ui) ->
+        ui.placeholder.hide();
 
     @$el.disableSelection()
