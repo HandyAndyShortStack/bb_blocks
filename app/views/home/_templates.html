@@ -35,7 +35,7 @@
 </script>
 
 <script id="template-ShowImageBlock" type="text/template">
-  {{ if (image_link) { }}
+  {{ if (typeof image_link !== 'undefined') { }}
     <a href="{{= image_link }}">
       <img src="{{= asset_url }}" />
     </a>
@@ -58,5 +58,9 @@
 </script>
 
 <script id="template-TextBlock" type="text/template">
+  {{= content }}
+</script>
+
+<script id="template-HTMLBlock" type="text/template">
   {{= content }}
 </script>

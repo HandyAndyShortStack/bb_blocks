@@ -45,7 +45,7 @@ describe "Block Instantiation" do
 
     it "and can be instantiated via the console", js: true do
       instantiate_block block_type
-      expect(page).to have_css(".block")
+      expect(!!page.find(".block")).to be_true
     end
   end
 
