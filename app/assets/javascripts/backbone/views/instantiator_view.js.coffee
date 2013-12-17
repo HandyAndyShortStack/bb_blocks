@@ -2,7 +2,7 @@ BbBlocks.InstantiatorView = Backbone.View.extend
 
   render: ->
     self = this
-    @$el.html '<div style="height:50px;background-color:grey;color:white;">' + @model.get('type') + '</div>'
+    @$el.html '<div class="instantiator" style="height:50px;background-color:grey;color:white;">' + @model.get('type') + '</div>'
 
   initialize: ->
     @render()
