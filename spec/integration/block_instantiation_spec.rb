@@ -2,29 +2,18 @@ require "spec_helper"
 
 def instantiate_block block_type
   page.execute_script(
-    "page.sandboxes.first().blocks.add({type: '#{block_type}', sandbox_id: page.sandboxes.first().id}).view.enter();"
+    "page.sandboxes.first().blocks.add({
+      type: '#{block_type}',
+      sandbox_id: page.sandboxes.first().id
+    }).view.enter();"
   )
-end
-
-def save_page
-  page.execute_script(
-    "page.sandboxes.publish();"
-  )
-end
-
-def wait_until
-  require "timeout"
-  Timeout.timeout(Capybara.default_wait_time) do
-    sleep(0.1) until value = yield
-    value
-  end
 end
 
 describe "Block Instantiation" do
 
   BLOCK_TYPES = [
-    # 'HTMLBlock','BlueSquareBlock', 'RedSquareBlock', 'ContactFormBlock',
-    # 'PageMenuBlock', 'PostListBlock', 'ShowImageBlock', 'SlideshowBlock',
+    'HTMLBlock','BlueSquareBlock', 'RedSquareBlock', 'ContactFormBlock',
+    'PageMenuBlock', 'PostListBlock', 'ShowImageBlock', 'SlideshowBlock',
     'TextBlock'
   ]
 
@@ -64,7 +53,8 @@ describe "Block Instantiation" do
 
     it "and can be saved", js: true do
       instantiate_block block_type
-      save_page
+      page.execute_script "page.sandboxes.publish();"
+      sleep 1
       visit current_path
       expect(!!page.find(".block")).to be_true
     end

@@ -4,6 +4,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
+require 'database_cleaner'
 
 Capybara.javascript_driver = :webkit
 
@@ -26,8 +27,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
-
+  config.use_transactional_fixtures = false
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
@@ -40,4 +40,18 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Capybara::DSL
+
+  config.before :suite do
+    DatabaseCleaner.strategy = :truncation, { except: %w(pages sandboxes) }
+    DatabaseCleaner.clean
+  end
+
+  config.before :each do
+    DatabaseCleaner.start
+    Sandbox.all.each { |sandbox| sandbox.update_attributes(order: []) }
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
+  end
 end
