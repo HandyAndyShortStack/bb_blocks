@@ -9,13 +9,21 @@ def instantiate_block block_type
   )
 end
 
-describe "Block Instantiation" do
+def wait_until
+  require "timeout"
+  Timeout.timeout(Capybara.default_wait_time) do
+    sleep(0.1) until value = yield
+    value
+  end
+end
 
-  BLOCK_TYPES = [
-    'HTMLBlock','BlueSquareBlock', 'RedSquareBlock', 'ContactFormBlock',
-    'PageMenuBlock', 'PostListBlock', 'ShowImageBlock', 'SlideshowBlock',
-    'TextBlock'
-  ]
+BLOCK_TYPES = [
+  'HTMLBlock','BlueSquareBlock', 'RedSquareBlock', 'ContactFormBlock',
+  'PageMenuBlock', 'PostListBlock', 'ShowImageBlock', 'SlideshowBlock',
+  'TextBlock'
+]
+
+describe "Block Instantiation" do
 
   before :each do
     visit "/"
@@ -29,22 +37,8 @@ describe "Block Instantiation" do
       end
     end
 
-    it "and can be instantiated by click-and-drag" do
-      #      _                       _               _       _              
-      #     | |                     (_)             (_)     | |             
-      #   __| |_ __ __ _  __ _  __ _ _ _ __   __ _   _ ___  | |_ ___   ___  
-      #  / _` | '__/ _` |/ _` |/ _` | | '_ \ / _` | | / __| | __/ _ \ / _ \ 
-      # | (_| | | | (_| | (_| | (_| | | | | | (_| | | \__ \ | || (_) | (_) |
-      #  \__,_|_|  \__,_|\__, |\__, |_|_| |_|\__, | |_|___/  \__\___/ \___/ 
-      #                   __/ | __/ |         __/ |                                                                                 
-      #                  |___/ |___/         |___/                          
-      #  _                   _   _          _            _   _ 
-      # | |                 | | | |        | |          | | | |
-      # | |__   __ _ _ __ __| | | |_ ___   | |_ ___  ___| |_| |
-      # | '_ \ / _` | '__/ _` | | __/ _ \  | __/ _ \/ __| __| |
-      # | | | | (_| | | | (_| | | || (_) | | ||  __/\__ \ |_|_|
-      # |_| |_|\__,_|_|  \__,_|  \__\___/   \__\___||___/\__(_)
-    end
+    # dragging turned out to be too difficult to test
+    # it "and can be instantiated by click-and-drag"
 
     it "and can be instantiated via the console", js: true do
       instantiate_block block_type
@@ -53,8 +47,8 @@ describe "Block Instantiation" do
 
     it "and can be saved", js: true do
       instantiate_block block_type
-      page.execute_script "page.sandboxes.publish();"
-      sleep 1
+      page.execute_script "page.sandboxes.publish(function() { window.readyForReload = true; });"
+      wait_until { page.evaluate_script "readyForReload" }
       visit current_path
       expect(!!page.find(".block")).to be_true
     end

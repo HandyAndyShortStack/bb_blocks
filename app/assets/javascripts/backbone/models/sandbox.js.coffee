@@ -13,4 +13,4 @@ BbBlocks.Sandbox = Backbone.Model.extend
   publish: (callback) ->
     @blocks.saveSync =>
       @set order: @getOrder()
-      @save()
+      @save {}, success: callback
