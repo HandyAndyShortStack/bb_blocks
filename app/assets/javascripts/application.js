@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require async
 //= require jquery-ui-1.10.3.custom
 //= require_tree .

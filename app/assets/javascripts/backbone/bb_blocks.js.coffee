@@ -6,19 +6,9 @@
 
 window.BbBlocks = {}
 
-_.templateSettings = {
-  interpolate: /\{\{\=(.+?)\}\}/g,
+_.templateSettings =
+  interpolate: /\{\{\=(.+?)\}\}/g
   evaluate: /\{\{(.+?)\}\}/g
-};
-
-Backbone.Collection.prototype.saveSync = (callback) ->
-  if typeof callback != 'function' then callback = ->
-  reduceFunc = (a, b) ->
-    ->
-      b.save {}, success: ->
-        b.view.resetId()
-        a()
-  _.reduce(@models, reduceFunc, callback)()
 
 $ ->
   BbBlocks.BlockView.prototype.sharedTemplate = $('#template-control-buttons').text()

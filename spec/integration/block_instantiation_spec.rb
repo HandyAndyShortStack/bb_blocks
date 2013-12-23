@@ -1,16 +1,24 @@
 require "spec_helper"
+require "timeout"
 
 def instantiate_block block_type
   page.execute_script(
     "page.sandboxes.first().blocks.add({
-      type: '#{block_type}',
-      sandbox_id: page.sandboxes.first().id
+      type: '#{block_type}'
     }).view.enter();"
   )
 end
 
+def publish_sandboxes
+  page.execute_script(
+    "page.sandboxes.publish(function() {
+      window.readyForReload = true;
+    });"
+  )
+  wait_until { page.evaluate_script "readyForReload" }
+end
+
 def wait_until
-  require "timeout"
   Timeout.timeout(Capybara.default_wait_time) do
     sleep(0.1) until value = yield
     value
@@ -29,7 +37,7 @@ describe "Block Instantiation" do
     visit "/"
   end
 
-  shared_examples_for "a block type" do
+  shared_examples_for "a block" do
 
     it "and has an instantiator", js: true do
       within dock do
@@ -38,7 +46,7 @@ describe "Block Instantiation" do
     end
 
     # dragging turned out to be too difficult to test
-    # it "and can be instantiated by click-and-drag"
+    # it "and can be instantiated by click-and-drag", js: true
 
     it "and can be instantiated via the console", js: true do
       instantiate_block block_type
@@ -47,8 +55,7 @@ describe "Block Instantiation" do
 
     it "and can be saved", js: true do
       instantiate_block block_type
-      page.execute_script "page.sandboxes.publish(function() { window.readyForReload = true; });"
-      wait_until { page.evaluate_script "readyForReload" }
+      publish_sandboxes
       visit current_path
       expect(!!page.find(".block")).to be_true
     end
@@ -56,7 +63,7 @@ describe "Block Instantiation" do
 
   BLOCK_TYPES.each do |block_type|
     describe block_type do
-      it_should_behave_like "a block type" do
+      it_should_behave_like "a block" do
         let(:block_type) { block_type }
         let(:dock) { page.find ".instantiator-dock[data-type='#{block_type}']" }
         let(:instantiator) { dock.find ".instantiator" }

@@ -6,8 +6,6 @@ BbBlocks.SandboxCollection = Backbone.Collection.extend
     @page.url() + '/sandboxes'
 
   publish: (callback) ->
-    reduceFunc = (a, b) ->
-      ->
-        b.publish ->
-          a()
-    _.reduce(@models, reduceFunc, callback)()
+    iterator = (model, callback) ->
+      model.publish callback
+    async.each @models, iterator, callback

@@ -11,6 +11,10 @@ BbBlocks.Sandbox = Backbone.Model.extend
       parseInt el.id[6..], 10
 
   publish: (callback) ->
-    @blocks.saveSync =>
+    iterator = (model, callback) ->
+      model.save {}, success: ->
+        callback()
+    async.each @blocks.models, iterator, =>
       @set order: @getOrder()
-      @save {}, success: callback
+      @save {}, success: ->
+        callback()

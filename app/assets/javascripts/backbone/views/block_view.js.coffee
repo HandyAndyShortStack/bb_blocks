@@ -2,10 +2,8 @@ BbBlocks.BlockView = Backbone.View.extend
 
   className: 'block'
 
-  id: ->
-    'block-' + @model.id
-
   render: ->
+    @resetId()
     @$el.html _.template(@template, @locals())
     this
   
@@ -18,7 +16,7 @@ BbBlocks.BlockView = Backbone.View.extend
     @$el.appendTo @model.collection.sandbox.view.$el    
 
   resetId: ->
-    @$el.attr('id', @id())
+    @$el.attr('id', 'block-' + @model.id)
 
   locals: ->
     _.extend @blockOptionsDefaults[@model.get('type')], @model.get('options')
