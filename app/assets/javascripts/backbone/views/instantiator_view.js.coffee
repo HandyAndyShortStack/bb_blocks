@@ -18,7 +18,6 @@ BbBlocks.InstantiatorView = Backbone.View.extend
         ui.item.removeAttr 'style'
         block = sandbox.blocks.add type: @model.get('type')
         ui.item.replaceWith block.view.$el
-        @setElement $('<div></div>')
         @initialize()
       start: (event, ui) ->
         ui.placeholder.hide();
