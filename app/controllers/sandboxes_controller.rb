@@ -28,6 +28,7 @@ class SandboxesController < ApplicationController
   def update
     respond_to do |format|
       if @sandbox.update_attributes(params[:sandbox])
+        @sandbox.trim_blocks
         format.json { head :no_content }
       else
         format.json { render json: @sandbox.errors, status: :unprocessable_entity }

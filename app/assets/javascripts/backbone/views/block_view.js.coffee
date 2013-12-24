@@ -5,6 +5,8 @@ BbBlocks.BlockView = Backbone.View.extend
   render: ->
     @resetId()
     @$el.html _.template(@template, @locals())
+    @$el.find('.icon-trash').on 'click', =>
+      @remove()
     this
   
   initialize: ->

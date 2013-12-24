@@ -35,6 +35,15 @@ describe "Block Instantiation" do
       visit current_path
       expect(!!page.find(".block")).to be_true
     end
+
+    it "and can be persistently deleted", js: true do
+      instantiate_block block_type
+      publish_sandboxes
+      expect(Sandbox.first.blocks.length).to eq(1)
+      within(".block") { find(".icon-trash").click }
+      publish_sandboxes
+      wait_until { Sandbox.first.blocks.length == 0 }
+    end
   end
 
   BLOCK_TYPES.each do |block_type|
